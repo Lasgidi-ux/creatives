@@ -226,43 +226,61 @@ p{text-wrap:pretty}
 .svc-head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:clamp(24px,4vw,60px);flex-wrap:wrap;margin-bottom:clamp(44px,5.5vw,76px)}
 .svc-head-row h2{font-size:clamp(40px,6.4vw,92px);font-weight:500}
 .svc-sub{font-family:var(--font-mono);font-size:15px;color:var(--ink-soft);max-width:40ch;line-height:1.7;margin:0}
-.svc-wrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(36px,5vw,84px);align-items:start}
-.svc-detail{position:sticky;top:clamp(96px,13vh,150px)}
-.svc-vis{aspect-ratio:5/4;border-radius:14px;overflow:hidden;background:#0e0e0d;box-shadow:0 30px 60px -36px rgba(0,0,0,.6)}
-.svc-vis svg{display:block;width:100%;height:100%}
-.svc-d-num{font-family:var(--font-mono);font-size:13px;color:var(--lime-deep);letter-spacing:.12em;margin-top:22px}
-.svc-d-title{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.8vw,38px);letter-spacing:-.02em;margin:6px 0 12px;line-height:1.05}
-.svc-d-tag{font-family:var(--font-mono);font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:44ch;margin:0}
-.svc-d-chips{list-style:none;display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 0;padding:0}
-.svc-d-chips li{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);border:1px solid var(--hair);border-radius:30px;padding:7px 13px}
-.svc-cta{margin-top:24px}
-.svc-list{border-top:1px solid var(--hair)}
-.svc-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(16px,2vw,28px);width:100%;
-  text-align:left;background:none;border:0;border-bottom:1px solid var(--hair);cursor:pointer;color:inherit;
-  padding:clamp(20px,2.4vw,32px) 0;position:relative;transition:padding-left .4s var(--ease)}
-.svc-row .n{font-family:var(--font-mono);font-size:13px;color:var(--ink-mute);transition:color .3s}
-.svc-row .ttl{font-family:var(--font-display);font-weight:500;font-size:clamp(21px,2.5vw,33px);letter-spacing:-.02em;color:var(--ink);transition:color .3s;line-height:1.1}
-.svc-row .go{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-mute);opacity:0;transform:translateX(-6px);transition:opacity .35s var(--ease),transform .35s var(--ease);white-space:nowrap}
-.svc-row::before{content:"";position:absolute;left:-2px;top:50%;height:0;width:2px;background:var(--lime);transform:translateY(-50%);transition:height .4s var(--ease)}
-.svc-row.active{padding-left:clamp(14px,1.6vw,22px)}
-.svc-row.active::before{height:62%}
-.svc-row.active .ttl{color:var(--lime-deep)}
-.svc-row.active .n{color:var(--ink)}
-.svc-row.active .go{opacity:1;transform:none}
-@media (hover:hover){
-  .svc-row:hover{padding-left:clamp(14px,1.6vw,22px)}
-  .svc-row:hover::before{height:62%}
-  .svc-row:hover .ttl{color:var(--lime-deep)}
-  .svc-row:hover .n{color:var(--ink)}
-  .svc-row:hover .go{opacity:1;transform:none}
-}
-.svc-m-panel{padding:2px 0 22px;animation:svcM .4s var(--ease)}
-@keyframes svcM{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+/* THE DECK — five concrete offers, sticky-stacked as you scroll (the pinned moment) */
+.deck{display:grid;gap:clamp(14px,1.8vw,22px)}
+.svc-card{
+  position:sticky;top:clamp(78px,9vh,110px);
+  background:var(--paper);border:1px solid var(--hair);border-radius:14px;
+  padding:clamp(22px,3.2vw,46px);overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(22px,3.4vw,56px);
+  box-shadow:0 -20px 44px -34px rgba(0,0,0,.4);
+  transition:border-color .35s var(--ease)}
+.svc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--lime);transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease)}
+.svc-card:hover{border-color:var(--ink-soft)}
+.svc-card:hover::before,.svc-card:focus-within::before{transform:scaleY(1)}
+.svc-card:nth-child(2){top:calc(clamp(78px,9vh,110px) + 14px)}
+.svc-card:nth-child(3){top:calc(clamp(78px,9vh,110px) + 28px)}
+.svc-card:nth-child(4){top:calc(clamp(78px,9vh,110px) + 42px)}
+.svc-card:nth-child(5){top:calc(clamp(78px,9vh,110px) + 56px)}
+.sc-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:clamp(18px,2.4vw,30px)}
+.sc-num{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.14em;color:var(--ink-mute);font-variant-numeric:tabular-nums}
+.sc-price{font-family:var(--font-mono);font-weight:700;font-size:13.5px;color:var(--ink);background:var(--lime);border-radius:30px;padding:8px 14px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sc-title{font-size:clamp(25px,3.2vw,42px);font-weight:500;letter-spacing:-.025em;line-height:1.02;max-width:14ch}
+.sc-promise{font-family:var(--font-mono);font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:44ch;margin:14px 0 0}
+.sc-list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px 24px;margin:clamp(18px,2.4vw,28px) 0 0;padding:clamp(16px,2vw,24px) 0 0;border-top:1px solid var(--hair)}
+.sc-list li{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);line-height:1.55;position:relative;padding-left:18px}
+.sc-list li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:2px;background:var(--lime)}
+.sc-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.sc-visual{aspect-ratio:16/10;border-radius:10px;overflow:hidden;background:#0e0e0d;flex:none}
+.sc-visual svg{display:block;width:100%;height:100%;transition:transform .6s var(--ease)}
+.svc-card:hover .sc-visual svg{transform:scale(1.045)}
+.sc-meta{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:auto;
+  font-family:var(--font-mono);font-size:13px;color:var(--ink-mute);font-variant-numeric:tabular-nums}
+.sc-go{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-weight:700;font-size:13.5px;color:var(--ink);border-bottom:1.5px solid var(--lime);padding-bottom:3px;transition:gap .3s var(--ease)}
+.sc-go:hover{gap:15px}
+
+/* HOW WE WORK — compact 3-step strip + one clear CTA */
+.how{margin-top:clamp(56px,7vw,104px);border-top:1px solid var(--hair);padding-top:clamp(28px,3.5vw,46px)}
+.how-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-mute);margin:0 0 clamp(22px,2.6vw,34px)}
+.how-steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.4vw,48px);margin:0 0 clamp(30px,4vw,50px);padding:0}
+.how-steps li{position:relative;padding-top:16px;border-top:1px solid var(--hair)}
+.how-steps li::before{content:"";position:absolute;left:0;top:-1px;width:34px;height:2px;background:var(--lime)}
+.how-steps .hn{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;color:var(--lime-deep);font-variant-numeric:tabular-nums}
+.how-steps h4{font-family:var(--font-display);font-weight:500;font-size:clamp(19px,2vw,26px);letter-spacing:-.02em;margin:8px 0}
+.how-steps p{font-family:var(--font-mono);font-size:13.5px;color:var(--ink-soft);line-height:1.65;margin:0;max-width:30ch}
+.how-cta{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.how-note{font-family:var(--font-mono);font-size:12.5px;color:var(--ink-mute)}
+
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (max-width:860px){
-  .svc-wrap{grid-template-columns:1fr;gap:0}
-  .svc-detail{display:none}
-  .svc-row .go{display:none}
+  .svc-card{grid-template-columns:1fr;gap:20px}
+  .sc-title{max-width:none}
+  .how-steps{grid-template-columns:1fr;gap:18px}
+  .how-steps p{max-width:none}
+}
+@media (max-width:560px){
+  .sc-list{grid-template-columns:1fr}
+  .sc-top{flex-wrap:wrap}
 }
 
 /* AI Photography — sine-wave Z-depth gallery */
@@ -553,6 +571,43 @@ p{text-wrap:pretty}
 @media (hover:none),(pointer:coarse){.cursor{display:none}}
 
 /* ============================================================
+   FILM GRAIN + HAIRLINE GRID OVERLAYS (transform-only, cheap)
+   ============================================================ */
+.grain{position:fixed;inset:-60%;z-index:260;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:240px 240px;will-change:transform;animation:grain 1.4s steps(6) infinite}
+@keyframes grain{
+  0%{transform:translate(0,0)}17%{transform:translate(-38px,26px)}33%{transform:translate(22px,-44px)}
+  50%{transform:translate(-30px,-18px)}67%{transform:translate(40px,30px)}83%{transform:translate(-14px,42px)}100%{transform:translate(0,0)}
+}
+.grid-lines{position:fixed;inset:0;z-index:1;pointer-events:none;max-width:var(--maxw);margin-inline:auto;
+  padding-inline:var(--pad);display:grid;grid-template-columns:repeat(4,1fr)}
+.grid-lines i{border-left:1px solid rgba(14,14,13,.05)}
+.grid-lines i:first-child{border-left:0}
+@media (max-width:860px){.grid-lines{display:none}}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}}
+
+/* STATS — proof row (dark section) */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--dark-line);border-radius:12px;overflow:hidden;margin-bottom:clamp(22px,3vw,36px)}
+.stat{padding:clamp(20px,2.6vw,34px);border-left:1px solid var(--dark-line)}
+.stat:first-child{border-left:0}
+.stat-n{font-family:var(--font-display);font-weight:500;font-size:clamp(30px,3.8vw,52px);letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+.stat-n b{color:var(--lime);font-weight:500}
+.stat-l{display:block;font-family:var(--font-mono);font-size:12.5px;color:var(--dark-soft);margin-top:8px}
+@media (max-width:760px){
+  .stat-row{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--dark-line)}
+}
+
+/* case-study covers in the work grid (injected at runtime from the gallery set) */
+.tile .ph-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;transition:transform .7s var(--ease)}
+.tile.has-photo::after{content:"";position:absolute;inset:auto 0 0 0;height:52%;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.62))}
+.tile:hover .ph-photo{transform:scale(1.06)}
+.eyebrow,.f-clock{font-variant-numeric:tabular-nums}
+
+/* ============================================================
    REVEAL STATES — only hide when JS present; reduced-motion & fallback show all
    ============================================================ */
 html.js [data-reveal]{opacity:0;transform:translateY(30px)}
@@ -744,6 +799,10 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
 <!-- ============ CUSTOM CURSOR ============ -->
 <div class="cursor" aria-hidden="true"></div>
 
+<!-- ============ FILM GRAIN + HAIRLINE GRID ============ -->
+<div class="grain" aria-hidden="true"></div>
+<div class="grid-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <a href="#top" class="logo" data-cursor>Creatives.</a>
@@ -840,58 +899,140 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
     <div class="container">
       <div class="svc-head-row">
         <div>
-          <p class="eyebrow" data-reveal><span class="num">(02)</span> <span class="ast">✳</span> Capabilities</p>
+          <p class="eyebrow" data-reveal><span class="num">(02)</span> <span class="ast">✳</span> Services &amp; Pricing</p>
           <h2 class="reveal-lines">
-            <span class="ln"><span>Everything an</span></span>
-            <span class="ln"><span>AI-first studio makes<span class="lime-word">.</span></span></span>
+            <span class="ln"><span>Five services.</span></span>
+            <span class="ln"><span>Zero guesswork<span class="lime-word">.</span></span></span>
           </h2>
         </div>
-        <p class="svc-sub" data-reveal>Ten disciplines, one pipeline — the machine handles the volume, our directors handle the taste. Hover a capability to see what’s inside.</p>
+        <p class="svc-sub" data-reveal>Concrete deliverables, real timelines, honest pricing. Pick a lane — we scope it and quote within 48 hours.</p>
       </div>
 
-      <div class="svc-wrap">
-        <aside class="svc-detail" aria-hidden="true">
-          <div class="svc-vis" id="svcVis"></div>
-          <div class="svc-d-num" id="svcNum">01</div>
-          <div class="svc-d-title" id="svcTitle">Motion Design &amp; AI Video</div>
-          <p class="svc-d-tag" id="svcTag"></p>
-          <ul class="svc-d-chips" id="svcChips"></ul>
-          <a href="#contact" class="acc-link svc-cta" data-cursor>Start a project <span aria-hidden="true">↗</span></a>
-        </aside>
+      <div class="deck">
 
-        <div class="svc-list" id="svcList">
-          <button class="svc-row active" data-i="0" data-reveal><span class="n">01</span><span class="ttl">Motion Design &amp; AI Video</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="1" data-reveal><span class="n">02</span><span class="ttl">AI Photography</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="2" data-reveal><span class="n">03</span><span class="ttl">Creative Direction</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="3" data-reveal><span class="n">04</span><span class="ttl">AI Content Production</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="4" data-reveal><span class="n">05</span><span class="ttl">3D &amp; CGI</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="5" data-reveal><span class="n">06</span><span class="ttl">Web Experiences</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="6" data-reveal><span class="n">07</span><span class="ttl">AI Brand Systems</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="7" data-reveal><span class="n">08</span><span class="ttl">Product Marketing Assets</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="8" data-reveal><span class="n">09</span><span class="ttl">AI Automation for Creatives</span><span class="go">View ↗</span></button>
-          <button class="svc-row" data-i="9" data-reveal><span class="n">10</span><span class="ttl">Visual Effects (VFX)</span><span class="go">View ↗</span></button>
+        <article class="svc-card" data-reveal>
+          <div class="sc-main">
+            <div class="sc-top"><span class="sc-num">01 / 05</span><span class="sc-price">from $4,500</span></div>
+            <h3 class="sc-title">Brand Identity &amp; Art Direction</h3>
+            <p class="sc-promise">A visual identity engineered to hold up everywhere — from favicon to billboard.</p>
+            <ul class="sc-list">
+              <li>Logo system, wordmark &amp; marks</li>
+              <li>Typography &amp; color system</li>
+              <li>Brand guidelines — PDF + working files</li>
+              <li>Launch asset kit (social, deck, print)</li>
+            </ul>
+          </div>
+          <div class="sc-side">
+            <div class="sc-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/><text x="40" y="178" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="128" fill="#fff" fill-opacity=".1">C</text><g><rect x="150" y="92" width="30" height="72" fill="#C6D92E"/><rect x="186" y="92" width="30" height="72" fill="#EFEDE4"/><rect x="222" y="92" width="30" height="72" fill="#8a857a"/><rect x="258" y="92" width="30" height="72" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/></g></svg>
+            </div>
+            <div class="sc-meta"><span class="sc-time">Typical: 3–5 weeks</span><a class="sc-go" href="#contact" data-cursor>Start this project <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </article>
+
+        <article class="svc-card" data-reveal>
+          <div class="sc-main">
+            <div class="sc-top"><span class="sc-num">02 / 05</span><span class="sc-price">from $1,800</span></div>
+            <h3 class="sc-title">AI-Assisted Product &amp; Fashion Photography</h3>
+            <p class="sc-promise">Studio-grade product and on-model imagery — no studio day, no sample shipping.</p>
+            <ul class="sc-list">
+              <li>20–60 finished frames per set</li>
+              <li>On-model, flat-lay &amp; hero shots</li>
+              <li>Retouch, grade &amp; brand-matched lighting</li>
+              <li>Crops for web, social &amp; retail</li>
+            </ul>
+          </div>
+          <div class="sc-side">
+            <div class="sc-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/><circle cx="158" cy="128" r="66" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><circle cx="158" cy="128" r="44" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2"/><circle cx="158" cy="128" r="22" fill="none" stroke="#C6D92E" stroke-width="2"/><circle cx="176" cy="110" r="5" fill="#C6D92E"/><rect x="46" y="58" width="40" height="28" rx="4" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/></svg>
+            </div>
+            <div class="sc-meta"><span class="sc-time">Typical: 1–2 weeks</span><a class="sc-go" href="#contact" data-cursor>Start this project <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </article>
+
+        <article class="svc-card" data-reveal>
+          <div class="sc-main">
+            <div class="sc-top"><span class="sc-num">03 / 05</span><span class="sc-price">from $2,400</span></div>
+            <h3 class="sc-title">Motion &amp; Short-Form Video</h3>
+            <p class="sc-promise">Reels, ads and product animation cut to stop the scroll — sound and captions included.</p>
+            <ul class="sc-list">
+              <li>15s / 30s / 60s cuts per concept</li>
+              <li>Product &amp; logo animation loops</li>
+              <li>Sound design, captions &amp; hooks</li>
+              <li>Exports for every platform</li>
+            </ul>
+          </div>
+          <div class="sc-side">
+            <div class="sc-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/><g stroke="#fff" stroke-opacity=".12" stroke-width="2"><path d="M28 96H292M28 160H292"/></g><g fill="#C6D92E"><rect x="40" y="120" width="8" height="40"/><rect x="58" y="104" width="8" height="72"/><rect x="76" y="132" width="8" height="44"/><rect x="94" y="92" width="8" height="96"/><rect x="112" y="120" width="8" height="56"/><rect x="130" y="138" width="8" height="30"/></g><circle cx="234" cy="128" r="34" fill="none" stroke="#C6D92E" stroke-width="2"/><path d="M225 112 254 128 225 144 Z" fill="#C6D92E"/></svg>
+            </div>
+            <div class="sc-meta"><span class="sc-time">Typical: 2–3 weeks</span><a class="sc-go" href="#contact" data-cursor>Start this project <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </article>
+
+        <article class="svc-card" data-reveal>
+          <div class="sc-main">
+            <div class="sc-top"><span class="sc-num">04 / 05</span><span class="sc-price">from $3,800</span></div>
+            <h3 class="sc-title">Web &amp; Interactive Design</h3>
+            <p class="sc-promise">Landing pages and sites like this one — designed, built and shipped fast.</p>
+            <ul class="sc-list">
+              <li>Design + build, no template bloat</li>
+              <li>Motion &amp; interaction design</li>
+              <li>Performance, SEO &amp; accessibility pass</li>
+              <li>Analytics wired in from day one</li>
+            </ul>
+          </div>
+          <div class="sc-side">
+            <div class="sc-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/><rect x="44" y="62" width="232" height="130" rx="8" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/><path d="M44 90H276" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><g fill="#C6D92E"><circle cx="60" cy="76" r="3"/><circle cx="72" cy="76" r="3"/><circle cx="84" cy="76" r="3"/></g><rect x="60" y="106" width="120" height="10" rx="5" fill="#fff" fill-opacity=".25"/><rect x="60" y="126" width="170" height="8" rx="4" fill="#fff" fill-opacity=".14"/><rect x="60" y="150" width="78" height="22" rx="6" fill="#C6D92E"/><path d="M214 150 232 158 225 161 229 170 225 172 221 163 214 167 Z" fill="#fff"/></svg>
+            </div>
+            <div class="sc-meta"><span class="sc-time">Typical: 3–6 weeks</span><a class="sc-go" href="#contact" data-cursor>Start this project <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </article>
+
+        <article class="svc-card" data-reveal>
+          <div class="sc-main">
+            <div class="sc-top"><span class="sc-num">05 / 05</span><span class="sc-price">price on request</span></div>
+            <h3 class="sc-title">Campaign Concepts &amp; Content Systems</h3>
+            <p class="sc-promise">One big idea, systemised — a repeatable content kit your team can run for a whole launch.</p>
+            <ul class="sc-list">
+              <li>Campaign concept &amp; key visual</li>
+              <li>Templates for social, email &amp; ads</li>
+              <li>30-day launch content calendar</li>
+              <li>Prompt &amp; asset pipeline handoff</li>
+            </ul>
+          </div>
+          <div class="sc-side">
+            <div class="sc-visual" aria-hidden="true">
+              <svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/><g fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"><rect x="40" y="84" width="70" height="50" rx="6"/><rect x="220" y="84" width="70" height="50" rx="6"/><rect x="40" y="150" width="70" height="50" rx="6"/><rect x="130" y="150" width="70" height="50" rx="6"/><rect x="220" y="150" width="70" height="50" rx="6"/></g><rect x="130" y="84" width="70" height="50" rx="6" fill="#C6D92E" fill-opacity=".18" stroke="#C6D92E" stroke-width="2"/></svg>
+            </div>
+            <div class="sc-meta"><span class="sc-time">Typical: 2–4 weeks</span><a class="sc-go" href="#contact" data-cursor>Start this project <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="how" data-reveal>
+        <p class="how-label">How we work</p>
+        <ol class="how-steps">
+          <li><span class="hn">01</span><h4>Brief</h4><p>One call and a one-pager. We scope it and quote within 48 hours.</p></li>
+          <li><span class="hn">02</span><h4>Build</h4><p>Weekly drops in a shared board. You react, we refine — async and fast.</p></li>
+          <li><span class="hn">03</span><h4>Ship</h4><p>Production-ready files, source included. No lock-in, no loose ends.</p></li>
+        </ol>
+        <div class="how-cta">
+          <a href="#contact" class="btn btn--dark magnetic" data-cursor>Get a quote in 48h <span class="ar">↗</span></a>
+          <span class="how-note">Fixed quotes · No retainers required</span>
         </div>
       </div>
-
-      <ul class="sr-only">
-        <li>Motion Design &amp; AI Video: AI Commercials, Product Ads, UGC Ads, Motion Graphics, Social Media Videos, Explainer Videos, Cinematic AI Films.</li>
-        <li>AI Photography: Product, Fashion, Lifestyle, Luxury Product Shoots, Food, Real Estate Visualization.</li>
-        <li>Creative Direction: Campaign Direction, Art Direction, Creative Consulting, Visual Storytelling, Moodboards, Brand Positioning.</li>
-        <li>AI Content Production: Marketing Creatives, Social Media Assets, Banner Ads, Print Campaigns, Billboards, Email Graphics.</li>
-        <li>3D &amp; CGI: 3D Product Rendering, CGI Advertising, Packaging Visualization, Motion Loops, Digital Sculptures.</li>
-        <li>Web Experiences: Website Design, Landing Pages, Interactive Experiences, Portfolio Websites, SaaS Design, Mobile UI.</li>
-        <li>AI Brand Systems: Logo Systems, Typography, Color Systems, Brand Guidelines, Marketing Assets, Brand Launch Kits.</li>
-        <li>Product Marketing Assets: Pitch Deck Design, Investor Decks, Product Mockups, App Store Screenshots, Launch Campaigns.</li>
-        <li>AI Automation for Creatives: AI Workflow Setup, Creative Automation, Prompt Systems, Asset Generation Pipelines, Internal Brand AI.</li>
-        <li>Visual Effects (VFX): Digital Humans, AI Effects, Scene Manipulation, Object Replacement, Cinematic Compositing.</li>
-      </ul>
 
       <div class="trust" data-reveal>
         <p class="label">What we make</p>
         <div class="marquee">
           <div class="marquee-track">
-            <span>AI Video</span><span>Photography</span><span>3D &amp; CGI</span><span>VFX</span><span>Brand Systems</span><span>Web</span><span>Automation</span><span>Creative Direction</span>
-            <span>AI Video</span><span>Photography</span><span>3D &amp; CGI</span><span>VFX</span><span>Brand Systems</span><span>Web</span><span>Automation</span><span>Creative Direction</span>
+            <span>Brand Identity</span><span>AI Photography</span><span>Motion &amp; Video</span><span>Web &amp; Interactive</span><span>Campaign Systems</span>
+            <span>Brand Identity</span><span>AI Photography</span><span>Motion &amp; Video</span><span>Web &amp; Interactive</span><span>Campaign Systems</span>
+            <span>Brand Identity</span><span>AI Photography</span><span>Motion &amp; Video</span><span>Web &amp; Interactive</span><span>Campaign Systems</span>
+            <span>Brand Identity</span><span>AI Photography</span><span>Motion &amp; Video</span><span>Web &amp; Interactive</span><span>Campaign Systems</span>
           </div>
         </div>
       </div>
@@ -934,7 +1075,7 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
         <span class="ln"><span>for itself.</span></span>
       </h2>
       <div class="gallery">
-        <a class="tile tile-vanta" data-reveal data-cursor>
+        <a class="tile tile-vanta" data-img="0" href="#contact" data-reveal data-cursor aria-label="Vanta — Brand Identity & Art Direction case study">
           <svg class="ph" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs><linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1c15"/><stop offset="1" stop-color="#070705"/></linearGradient></defs>
             <rect width="320" height="400" fill="url(#vg)"/>
@@ -944,9 +1085,9 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
             <g stroke="#C6D92E" stroke-width="2"><path d="M28 28h14M35 21v14"/></g>
             <text x="28" y="372" font-family="monospace" font-size="11" fill="#fff" fill-opacity=".4" letter-spacing="2">001 / IDENTITY</text>
           </svg>
-          <div class="meta"><div class="t">Vanta</div><div class="c">Brand Identity</div></div>
+          <div class="meta"><div class="t">Vanta</div><div class="c">Brand Identity &amp; Art Direction</div></div>
         </a>
-        <a class="tile tile-noir" data-reveal data-cursor>
+        <a class="tile tile-noir" data-img="3" href="#contact" data-reveal data-cursor aria-label="NOIR — AI Fashion Photography case study">
           <svg class="ph" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="ng" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2a22"/><stop offset="1" stop-color="#050504"/></linearGradient>
@@ -959,9 +1100,9 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
             <rect width="300" height="400" filter="url(#ngr)" opacity=".55"/>
             <circle cx="40" cy="40" r="4" fill="#C6D92E"/>
           </svg>
-          <div class="meta"><div class="t">NOIR</div><div class="c">Campaign</div></div>
+          <div class="meta"><div class="t">NOIR</div><div class="c">AI Fashion Photography</div></div>
         </a>
-        <a class="tile tile-linear" data-reveal data-cursor>
+        <a class="tile tile-linear" data-img="5" href="#contact" data-reveal data-cursor aria-label="Linear — AI Product Photography case study">
           <svg class="ph" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#24241d"/><stop offset="1" stop-color="#0c0c0a"/></linearGradient></defs>
             <rect width="300" height="400" fill="url(#lg)"/>
@@ -972,9 +1113,9 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
             <circle cx="208" cy="262" r="7" fill="#C6D92E"/>
             <text x="70" y="316" font-family="monospace" font-size="11" fill="#fff" fill-opacity=".4" letter-spacing="2">003 / PRODUCT</text>
           </svg>
-          <div class="meta"><div class="t">Linear</div><div class="c">Product Imagery</div></div>
+          <div class="meta"><div class="t">Linear</div><div class="c">AI Product Photography</div></div>
         </a>
-        <a class="tile tile-grid" data-reveal data-cursor>
+        <a class="tile tile-grid" data-img="7" href="#contact" data-reveal data-cursor aria-label="Gridflow — Web & Interactive Design case study">
           <svg class="ph" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d1d16"/><stop offset="1" stop-color="#0a0a08"/></linearGradient></defs>
             <rect width="640" height="360" fill="url(#gg)"/>
@@ -988,9 +1129,9 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
             <g stroke="#C6D92E" stroke-width="2"><path d="M60 34h12M66 28v12"/></g>
             <text x="60" y="338" font-family="monospace" font-size="11" fill="#fff" fill-opacity=".4" letter-spacing="2">004 / 12-COL GRID</text>
           </svg>
-          <div class="meta"><div class="t">Gridflow</div><div class="c">Website Design</div></div>
+          <div class="meta"><div class="t">Gridflow</div><div class="c">Web &amp; Interactive Design</div></div>
         </a>
-        <a class="tile tile-tall" data-reveal data-cursor>
+        <a class="tile tile-tall" data-img="9" href="#contact" data-reveal data-cursor aria-label="Atlas — Campaign Concepts & Content Systems case study">
           <svg class="ph" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#15150f"/><stop offset="1" stop-color="#060605"/></linearGradient></defs>
             <rect width="320" height="400" fill="url(#ag)"/>
@@ -1002,7 +1143,7 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
             <circle cx="184" cy="186" r="4" fill="#C6D92E"/>
             <text x="28" y="372" font-family="monospace" font-size="11" fill="#fff" fill-opacity=".4" letter-spacing="2">005 / DIRECTION</text>
           </svg>
-          <div class="meta"><div class="t">Atlas</div><div class="c">Art Direction</div></div>
+          <div class="meta"><div class="t">Atlas</div><div class="c">Campaign Concepts &amp; Content Systems</div></div>
         </a>
       </div>
       <div class="work-foot"><a href="#contact" class="btn btn--ghost" data-cursor>View All Projects <span class="ar">↗</span></a></div>
@@ -1056,6 +1197,13 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
           <span class="who-meta"><span class="n">Maya Okonkwo</span><span class="r">Founder &amp; CEO, Lumen Studio</span></span>
         </figcaption>
       </figure>
+
+      <div class="stat-row" data-reveal>
+        <div class="stat"><span class="stat-n">120<b>+</b></span><span class="stat-l">Projects shipped</span></div>
+        <div class="stat"><span class="stat-n">14</span><span class="stat-l">Industries served</span></div>
+        <div class="stat"><span class="stat-n">3.4<b>×</b></span><span class="stat-l">Avg. engagement lift</span></div>
+        <div class="stat"><span class="stat-n">48<b>h</b></span><span class="stat-l">To first frames</span></div>
+      </div>
 
       <div class="quotes">
         <figure class="quote" data-reveal>
@@ -1542,75 +1690,19 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
   }
 
   /* ---------------------------------------------------------------------------
-     3b. CAPABILITIES INDEX — interactive list ↔ sticky preview (accordion on mobile)
+     3b. WORK GRID — reuse the embedded gallery photography as case-study covers
+        (no duplicated base64; the SVG art remains the no-JS fallback)
      --------------------------------------------------------------------------- */
-  (function capabilities(){
-    const list=$('#svcList'); if(!list) return;
-    const vis=$('#svcVis'), dnum=$('#svcNum'), dtitle=$('#svcTitle'), dtag=$('#svcTag'), dchips=$('#svcChips');
-    const BG='<rect width="320" height="256" fill="#0e0e0d"/><ellipse cx="92" cy="72" rx="180" ry="130" fill="#C6D92E" opacity=".06"/>';
-    const SVG={
-      0:'<g stroke="#fff" stroke-opacity=".12" stroke-width="2"><path d="M28 96H292M28 160H292"/></g><g fill="#C6D92E"><rect x="40" y="120" width="8" height="40"/><rect x="58" y="104" width="8" height="72"/><rect x="76" y="132" width="8" height="44"/><rect x="94" y="92" width="8" height="96"/><rect x="112" y="120" width="8" height="56"/><rect x="130" y="138" width="8" height="30"/></g><circle cx="234" cy="128" r="34" fill="none" stroke="#C6D92E" stroke-width="2"/><path d="M225 112 254 128 225 144 Z" fill="#C6D92E"/>',
-      1:'<circle cx="158" cy="128" r="66" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><circle cx="158" cy="128" r="44" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2"/><circle cx="158" cy="128" r="22" fill="none" stroke="#C6D92E" stroke-width="2"/><circle cx="176" cy="110" r="5" fill="#C6D92E"/><rect x="46" y="58" width="40" height="28" rx="4" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>',
-      2:'<circle cx="160" cy="128" r="60" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2"/><g transform="translate(160 128)" stroke="#C6D92E" stroke-width="3" stroke-linecap="round"><path d="M0 -50V50M-50 0H50M-35 -35 35 35M-35 35 35 -35"/></g><circle cx="160" cy="128" r="6" fill="#0e0e0d" stroke="#C6D92E" stroke-width="2"/>',
-      3:'<g fill="none" stroke="#fff" stroke-opacity=".2" stroke-width="2"><rect x="40" y="84" width="70" height="50" rx="6"/><rect x="220" y="84" width="70" height="50" rx="6"/><rect x="40" y="150" width="70" height="50" rx="6"/><rect x="130" y="150" width="70" height="50" rx="6"/><rect x="220" y="150" width="70" height="50" rx="6"/></g><rect x="130" y="84" width="70" height="50" rx="6" fill="#C6D92E" fill-opacity=".18" stroke="#C6D92E" stroke-width="2"/>',
-      4:'<g fill="none" stroke="#C6D92E" stroke-width="2" stroke-linejoin="round"><path d="M160 72 212 102 212 160 160 190 108 160 108 102 Z"/><path d="M160 72V131M160 131 212 160M160 131 108 160"/></g><path d="M160 72 212 102 160 131 108 102 Z" fill="#C6D92E" fill-opacity=".15"/>',
-      5:'<rect x="44" y="62" width="232" height="130" rx="8" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/><path d="M44 90H276" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><g fill="#C6D92E"><circle cx="60" cy="76" r="3"/><circle cx="72" cy="76" r="3"/><circle cx="84" cy="76" r="3"/></g><rect x="60" y="106" width="120" height="10" rx="5" fill="#fff" fill-opacity=".25"/><rect x="60" y="126" width="170" height="8" rx="4" fill="#fff" fill-opacity=".14"/><rect x="60" y="150" width="78" height="22" rx="6" fill="#C6D92E"/><path d="M214 150 232 158 225 161 229 170 225 172 221 163 214 167 Z" fill="#fff"/>',
-      6:'<text x="40" y="178" font-family="\'Space Grotesk\',sans-serif" font-weight="700" font-size="128" fill="#fff" fill-opacity=".1">C</text><g><rect x="150" y="92" width="30" height="72" fill="#C6D92E"/><rect x="186" y="92" width="30" height="72" fill="#EFEDE4"/><rect x="222" y="92" width="30" height="72" fill="#8a857a"/><rect x="258" y="92" width="30" height="72" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/></g>',
-      7:'<g transform="rotate(-7 152 128)"><rect x="74" y="80" width="156" height="100" rx="8" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2"/></g><rect x="86" y="74" width="156" height="100" rx="8" fill="#14130f" stroke="#C6D92E" stroke-width="2"/><rect x="102" y="90" width="80" height="9" rx="4" fill="#fff" fill-opacity=".3"/><g fill="#C6D92E"><rect x="102" y="132" width="11" height="28"/><rect x="120" y="120" width="11" height="40"/><rect x="138" y="140" width="11" height="20"/></g><path d="M170 150 210 120" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>',
-      8:'<path d="M48 178 120 122 200 150 272 92" fill="none" stroke="#C6D92E" stroke-opacity=".5" stroke-width="2"/><g fill="#0e0e0d" stroke="#C6D92E" stroke-width="2"><circle cx="48" cy="178" r="7"/><circle cx="200" cy="150" r="7"/><circle cx="272" cy="92" r="7"/></g><circle cx="120" cy="122" r="11" fill="#C6D92E"/><g transform="translate(236 178)"><circle r="15" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="3"/><g stroke="#fff" stroke-opacity=".4" stroke-width="3"><path d="M0 -22V-17M0 17V22M-22 0H-17M17 0H22M-15 -15 -11 -11M15 15 11 11M-15 15 -11 11M15 -15 11 -11"/></g><circle r="4" fill="#C6D92E"/></g>',
-      9:'<g fill="none" stroke="#fff" stroke-opacity=".15" stroke-width="2"><rect x="86" y="88" width="150" height="104" rx="6"/><rect x="78" y="80" width="150" height="104" rx="6"/></g><rect x="70" y="72" width="150" height="104" rx="6" fill="#14130f" stroke="#C6D92E" stroke-width="2"/><g stroke="#C6D92E" stroke-width="2" fill="none"><path d="M120 152 q-10 -40 18 -52 q14 -6 22 6"/><path d="M160 106 168 120 160 124"/></g><g fill="#C6D92E"><circle cx="150" cy="120" r="2"/><circle cx="172" cy="140" r="2"/><circle cx="140" cy="150" r="2"/></g>'
-    };
-    const DATA=[
-      {tag:'Films, ads, and motion that actually move — generated, directed, and cut in-house.',subs:['AI Commercials','Product Ads','UGC Ads','Motion Graphics','Social Media Videos','Explainer Videos','Cinematic AI Films']},
-      {tag:'Studio-grade shoots without the studio, the lighting rig, or the wait.',subs:['Product Photography','Fashion Photography','Lifestyle Photography','Luxury Product Shoots','Food Photography','Real Estate Visualization']},
-      {tag:'Most studios sell execution. We sell the idea that makes it worth executing.',subs:['Campaign Direction','Art Direction','Creative Consulting','Visual Storytelling','Moodboards','Brand Positioning']},
-      {tag:'Always-on creative at campaign scale, on-brand across every placement.',subs:['Marketing Creatives','Social Media Assets','Banner Ads','Print Campaigns','Billboards','Email Graphics']},
-      {tag:'Photoreal products and worlds — built, not shot.',subs:['3D Product Rendering','CGI Advertising','Packaging Visualization','Motion Loops','Digital Sculptures']},
-      {tag:'Sites and interfaces that feel like the brand, not a template.',subs:['Website Design','Landing Pages','Interactive Experiences','Portfolio Websites','SaaS Design','Mobile UI']},
-      {tag:'Identity systems engineered to hold up across every surface and size.',subs:['Logo Systems','Typography','Color Systems','Brand Guidelines','Marketing Assets','Brand Launch Kits']},
-      {tag:'Everything a launch needs, from the deck to the app-store screens.',subs:['Pitch Deck Design','Investor Decks','Product Mockups','App Store Screenshots','Launch Campaigns']},
-      {tag:'Your studio, running on a pipeline — generation wired into your workflow.',subs:['AI Workflow Setup','Creative Automation','Prompt Systems','Asset Generation Pipelines','Internal Brand AI']},
-      {tag:'Cinematic post and effects, generated and composited frame by frame.',subs:['Digital Humans','AI Effects','Scene Manipulation','Object Replacement','Cinematic Compositing']}
-    ];
-    const rows=$$('.svc-row',list);
-    const titleOf=i=>rows[i]?rows[i].querySelector('.ttl').textContent:'';
-    const numOf=i=>rows[i]?rows[i].querySelector('.n').textContent:'';
-    const isDesktop=()=>matchMedia('(min-width:861px)').matches;
-    function renderSvc(i){
-      const d=DATA[i]; if(!d) return;
-      if(vis) vis.innerHTML='<svg viewBox="0 0 320 256" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'+BG+(SVG[i]||'')+'</svg>';
-      if(dnum) dnum.textContent=numOf(i);
-      if(dtitle) dtitle.textContent=titleOf(i);
-      if(dtag) dtag.textContent=d.tag;
-      if(dchips) dchips.innerHTML=d.subs.map(x=>'<li>'+x+'</li>').join('');
-      if(window.gsap && !reduce){
-        gsap.fromTo(vis,{clipPath:'inset(100% 0 0 0)'},{clipPath:'inset(0% 0 0 0)',duration:.55,ease:'power3.out'});
-        gsap.fromTo([dnum,dtitle,dtag],{y:14,opacity:0},{y:0,opacity:1,duration:.5,stagger:.05,ease:'power3.out'});
-        if(dchips.children.length) gsap.fromTo(dchips.children,{y:10,opacity:0},{y:0,opacity:1,duration:.4,stagger:.03,ease:'power3.out'});
-      }
-    }
-    function setActive(i){ rows.forEach(r=>r.classList.toggle('active', +r.dataset.i===i)); renderSvc(i); }
-    function toggleMobile(r,i){
-      const wasOpen=r.classList.contains('active');
-      $$('.svc-m-panel',list).forEach(p=>p.remove());
-      rows.forEach(x=>x.classList.remove('active'));
-      if(wasOpen) return;
-      const d=DATA[i];
-      const panel=document.createElement('div'); panel.className='svc-m-panel';
-      panel.innerHTML='<p class="svc-d-tag">'+d.tag+'</p><ul class="svc-d-chips">'+d.subs.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
-      r.after(panel); r.classList.add('active');
-    }
-    rows.forEach(r=>{
-      const i=+r.dataset.i;
-      r.addEventListener('mouseenter',()=>{ if(isDesktop()) setActive(i); });
-      r.addEventListener('focus',()=>{ if(isDesktop()) setActive(i); });
-      r.addEventListener('click',e=>{
-        if(isDesktop()){ if(window.__lenis) window.__lenis.scrollTo('#contact',{offset:-10}); else location.hash='#contact'; }
-        else { e.preventDefault(); toggleMobile(r,i); }
-      });
+  (function workPhotos(){
+    const pool=$$('.ztile img');
+    if(!pool.length) return;
+    $$('.tile[data-img]').forEach(t=>{
+      const srcImg=pool[+t.dataset.img]; if(!srcImg||!srcImg.src) return;
+      const img=new Image(); img.src=srcImg.src; img.alt=''; img.className='ph-photo'; img.setAttribute('aria-hidden','true');
+      const meta=t.querySelector('.meta');
+      if(meta) t.insertBefore(img,meta); else t.appendChild(img);
+      t.classList.add('has-photo');
     });
-    addEventListener('resize',()=>{ if(isDesktop()) $$('.svc-m-panel',list).forEach(p=>p.remove()); });
-    renderSvc(0);
   })();
 
   /* ---------------------------------------------------------------------------
@@ -1663,15 +1755,27 @@ html.no-anim .reveal-lines .ln>span{opacity:1!important;transform:none!important
       gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.9,ease:'power3.out',
         scrollTrigger:{trigger:el,start:'top 88%'}});
     });
-    // line-masked headings
+    // line-masked headings (y:0 clears the CSS translateY(110%) that gsap parses as a px offset)
     $$('.reveal-lines').forEach(h=>{
-      gsap.fromTo($$('.ln>span',h),{yPercent:110},{yPercent:0,duration:1,ease:'power4.out',stagger:.1,
+      gsap.fromTo($$('.ln>span',h),{y:0,yPercent:110},{yPercent:0,duration:1,ease:'power4.out',stagger:.1,
         scrollTrigger:{trigger:h,start:'top 86%'}});
     });
     // parallax drift on heavy media
     if(window.ScrollTrigger){
       $$('.cube-stage,.sphere-stage,.cta-band .tunnel').forEach(el=>{
         gsap.to(el,{yPercent:-8,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}});
+      });
+      // scrubbed hero parallax (desktop layout only — media is absolute there)
+      if(matchMedia('(min-width:861px)').matches){
+        gsap.to('.hero-media',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+        gsap.to('.hero-copy',{yPercent:-10,opacity:.35,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+      }
+      // services deck: each pinned card settles back as the next offer covers it
+      const cards=$$('.svc-card');
+      cards.forEach((card,i)=>{
+        if(i===cards.length-1) return;
+        gsap.to(card,{scale:.955,opacity:.7,transformOrigin:'center top',ease:'none',
+          scrollTrigger:{trigger:cards[i+1],start:'top bottom-=120',end:'top top+=220',scrub:true}});
       });
     }
     // hero headline scramble-in
